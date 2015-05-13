@@ -10,8 +10,7 @@ var SymlinkStream =	require('./SymlinkStream');
 
 
 
-// todo: stream error handling
-// todo: watch
+// todo: solid stream error handling
 // todo: filter dirs, only files
 
 
