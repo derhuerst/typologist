@@ -1,0 +1,37 @@
+{
+	"name": "typologist",
+	"description": "typologist can sort files into symlink collections.",
+	"version": "0.1.0",
+	"main": "src/typologist.js",
+	"keywords": [
+		"typologist",
+		"sort",
+		"files",
+		"symlink",
+		"symbolic",
+		"collection",
+		"folder",
+		"directory",
+		"plugin",
+		"javascript"
+	],
+	"author": {
+		"name": "Jannis R",
+		"email": "mail@jannisr.de",
+		"url": "http://jannisr.de"
+	},
+	"homepage": "https://github.com/derhuerst/typologist",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/derhuerst/typologist.git"
+	},
+	"bugs": {
+		"url": "https://github.com/derhuerst/typologist/issues"
+	},
+	"licenses": {
+		"type": "MIT",
+		"url": "http://github.com/derhuerst/typologist/raw/master/LICENSE"
+	},
+	"dependencies": {
+	}
+}
