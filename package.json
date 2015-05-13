@@ -2,7 +2,7 @@
 	"name": "typologist",
 	"description": "typologist can sort files into symlink collections.",
 	"version": "0.1.0",
-	"main": "src/typologist.js",
+	"main": "src/Typologist.js",
 	"keywords": [
 		"typologist",
 		"sort",
@@ -33,5 +33,11 @@
 		"url": "http://github.com/derhuerst/typologist/raw/master/LICENSE"
 	},
 	"dependencies": {
+		"through2":			"^0.6.5",
+		"vinyl-fs":			"^1.0.0",
+		"vinyl-basename":	"^0.1.0",
+		"vinyl":			"^0.4.6",
+		"mkdirp":			"^0.5.0",
+		"graceful-fs":		"^3.0.6"
 	}
 }
