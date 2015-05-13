@@ -1,7 +1,8 @@
 // dependencies
 var EventEmitter =	require('events').EventEmitter;
-var util =			require('util');
 var path =			require('path');
+var commondir =		require('commondir');
+var util =			require('util');
 var through2 =		require('through2');
 var SourceStream =	require('./SourceStream');
 var SortStream =	require('./SortStream');
@@ -11,16 +12,19 @@ var SymlinkStream =	require('./SymlinkStream');
 
 // todo: stream error handling
 // todo: watch
+// todo: filter dirs, only files
 
 
 
 // Initialize a new `Typologist`.
-function Typologist (base, source, dest) {
+function Typologist (source, dest) {
 	EventEmitter.call(this);
 
-	this.base = path.join(process.cwd(), base || '.');
-	this.source = source || '_';
-	this.dest = dest || '.';
+	source = path.join(process.cwd(), source || '.');
+	dest = path.join(process.cwd(), dest || '.');
+	this.base = commondir(source, dest);
+	this.source = path.relative(this.base, source);
+	this.dest = path.relative(this.base, dest);
 	this.plugins = [];
 }
 util.inherits(Typologist, EventEmitter);

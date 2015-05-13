@@ -4,8 +4,8 @@ var path =		require('path');
 
 
 
-function SortStream (basePath, sourcePath, destPath) {
-	destPath = path.join(basePath, destPath);
+function SortStream (base, source, dest) {
+	dest = path.join(base, dest);
 
 	return through2.obj(function (sourceFile, _, callback) {
 		var i, collection, j, file;
@@ -18,9 +18,9 @@ function SortStream (basePath, sourcePath, destPath) {
 
 			for (j = 0; j < collection.length; j++) {
 				file = new VinylFile({
-					cwd: destPath,
-					base: destPath,
-					path: path.join(destPath, path.join(i, collection[j])),
+					cwd: dest,
+					base: dest,
+					path: path.join(dest, path.join(i, collection[j])),
 					contents: sourceFile.contents
 				});
 				file.source = sourceFile;
