@@ -1,7 +1,7 @@
 {
 	"name": "typologist",
 	"description": "typologist can sort files into symlink collections.",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"main": "src/Typologist.js",
 	"keywords": [
 		"typologist",
