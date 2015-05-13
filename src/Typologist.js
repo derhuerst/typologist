@@ -12,6 +12,7 @@ var SymlinkStream =	require('./SymlinkStream');
 
 // todo: solid stream error handling
 // todo: filter dirs, only files
+// todo: relative symlinks?
 
 
 
@@ -21,7 +22,7 @@ function Typologist (source, dest) {
 
 	source = path.join(process.cwd(), source || '.');
 	dest = path.join(process.cwd(), dest || '.');
-	this.base = commondir(source, dest);
+	this.base = commondir([source, dest]);
 	this.source = path.relative(this.base, source);
 	this.dest = path.relative(this.base, dest);
 	this.plugins = [];
