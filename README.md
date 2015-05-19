@@ -1,5 +1,7 @@
 # typologist
 
+[![dependency status](https://img.shields.io/david/derhuerst/typologist.svg)](https://david-dm.org/derhuerst/typologist#info=dependencies)
+
 ***typologist* sorts files into [symlink](http://en.wikipedia.org/wiki/Symbolic_link) collections**, using easy-to-write plugins. It can be used to categorize **every type of file-based data**, for example text, music or photos. Because it leverages plugins, it can **categorize by any criteria**, such as file extension, size, ID3 tag, EXIF data or checksum.
 
 
