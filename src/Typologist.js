@@ -10,7 +10,6 @@ var SymlinkStream =	require('./SymlinkStream');
 
 
 
-// todo: solid stream error handling
 // todo: filter dirs, only files
 // todo: relative symlinks?
 
@@ -34,6 +33,7 @@ util.inherits(Typologist, EventEmitter);
 // Wrap a given `plugin` functions in a *through2* wrapper and add it to `plugins`.
 Typologist.prototype.use = function (plugin) {
 	this.plugins.push(through2.obj(plugin));
+	this.emit('use', plugin);
 
 	return this;
 };
@@ -42,20 +42,43 @@ Typologist.prototype.use = function (plugin) {
 
 // Search for files in `globs` and process them using `plugins`.
 Typologist.prototype.src = function (globs) {
-	var stream = new SourceStream(this.base, this.source, globs);
+	var onError, onPluginError, stream;
+
+	onError = this._onError.bind(this);
+	onPluginError = this._onPluginError.bind(this);
+
+	stream = new SourceStream(this.base, this.source, globs);
+	stream.on('error', onError);
 
 	var i, length;
 	for (i = 0, length = this.plugins.length; i < length; i++) {
 		stream = stream.pipe(this.plugins[i]);
+		stream.on('error', onPluginError);
 	}
 
-	stream
-	.pipe(new SortStream(this.base, this.source, this.dest))
-	.pipe(new SymlinkStream(this.base, this.source, this.dest))
+	stream = stream.pipe(new SortStream(this.base, this.source, this.dest));
+	stream.on('error', onError);
 
-	.on('error', console.error);
+	stream = stream.pipe(new SymlinkStream(this.base, this.source, this.dest));
+	stream.on('error', onError);
 
 	return this;
+};
+
+
+
+// Handle a stream error from Typologist's components.
+Typologist.prototype._onError = function (error) {
+	this.emit('error', error);
+	throw error;
+};
+
+
+
+// Handle a stream error from a plugin.
+Typologist.prototype._onPluginError = function (error) {
+	console.log('plugin-error', error);
+	this.emit('plugin-error', error);
 };
 
 
